@@ -6,39 +6,100 @@
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 09:45:10 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/06/08 09:42:28 by tdelmas2         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:53:22 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScalarConverter.hpp"
-#include "../includes/Serializer.hpp"
+#include "../includes/A.hpp"
+#include "../includes/B.hpp"
+#include "../includes/C.hpp"
+#include <cstdlib>
+#include <ctime>
+#include <exception>
+#include <iostream>
+
+Base *generate(void)
+{
+    int random = rand() % 3;
+    switch (random)
+    {
+    case 0:
+        std::cout << "[Générateur] Création d'une instance de A" << std::endl;
+        return new A();
+    case 1:
+        std::cout << "[Générateur] Création d'une instance de B" << std::endl;
+        return new B();
+    case 2:
+        std::cout << "[Générateur] Création d'une instance de C" << std::endl;
+        return new C();
+        std::cout << "[Générateur] Erreur inattendue" << std::endl;
+
+        return NULL;
+    }
+    return NULL;
+}
+
+void identify(Base *p)
+{
+    if (dynamic_cast<A *>(p) != NULL)
+    {
+        std::cout << "A" << std::endl;
+    }
+    else if (dynamic_cast<B *>(p) != NULL)
+    {
+        std::cout << "B" << std::endl;
+    }
+    else if (dynamic_cast<C *>(p) != NULL)
+    {
+        std::cout << "C" << std::endl;
+    }
+}
+
+void identify(Base &p)
+{
+    try
+    {
+        A &a = dynamic_cast<A &>(p);
+        std::cout << "A" << std::endl;
+        (void)a;
+        return;
+    }
+    catch (const std::exception &e)
+    {
+        (void)e;
+    }
+    try
+    {
+        B &b = dynamic_cast<B &>(p);
+        std::cout << "B" << std::endl;
+        (void)b;
+        return;
+    }
+    catch (const std::exception &e)
+    {
+        (void)e;
+    }
+    try
+    {
+        C &c = dynamic_cast<C &>(p);
+        std::cout << "C" << std::endl;
+        (void)c;
+        return;
+    }
+    catch (const std::exception &e)
+    {
+        (void)e;
+    }
+}
 
 int main(void)
 {
-    Data monObjet;
-    monObjet.num = 42;
-    monObjet.name = "Lala";
+    srand(time(NULL));
+    Base *test = generate();
 
-    Data *ptrOrigine = &monObjet;
+    identify(*test);
+    identify(test);
 
-    uintptr_t rawBits = Serializer::serialize(ptrOrigine);
-
-    Data *ptrDestination = Serializer::deserialize(rawBits);
-
-    std::cout << "Adresse d'origine      : " << ptrOrigine << std::endl;
-    std::cout << "Valeur brute (uintptr) : " << rawBits << std::endl;
-    std::cout << "Adresse de destination : " << ptrDestination << std::endl;
-
-    if (ptrOrigine == ptrDestination)
-    {
-        std::cout << "SUCCÈS : Les pointeurs sont identiques !" << std::endl;
-        std::cout << "Données intactes : " << ptrDestination->name << " (NUM: " << ptrDestination->num << ")"
-                  << std::endl;
-    }
-    else
-    {
-        std::cout << "ÉCHEC : Les pointeurs diffèrent." << std::endl;
-    }
-
+    delete test;
     return 0;
 }

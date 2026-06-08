@@ -1,8 +1,7 @@
 NAME = convert
 CXX = c++
-MY_SOURCES = srcs/main.cpp	 \
-			 srcs/ScalarConverter.cpp \
-			 srcs/Serializer.cpp
+MY_SOURCES = srcs/main.cpp \
+			 srcs/Base.cpp
 
 			 
 

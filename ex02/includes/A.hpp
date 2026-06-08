@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   A.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/08 09:17:22 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/06/08 09:19:38 by tdelmas2         ###   ########.fr       */
+/*   Created: 2026/06/08 09:52:20 by tdelmas2          #+#    #+#             */
+/*   Updated: 2026/06/08 10:00:57 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-#define DATA_HPP
+#ifndef A_HPP
+#define A_HPP
 
-#include <iostream>
+#include "Base.hpp"
 
-typedef struct s_data
+class A : public Base
 {
-    std::string name;
-    int num;
-} Data;
+};
 
 #endif
