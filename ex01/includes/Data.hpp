@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/05 09:45:10 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/06/05 15:12:49 by tdelmas2         ###   ########.fr       */
+/*   Created: 2026/06/08 09:17:22 by tdelmas2          #+#    #+#             */
+/*   Updated: 2026/06/08 09:19:38 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScalarConverter.hpp"
+#ifndef DATA_HPP
+#define DATA_HPP
 
-int main (int ac, char **av)
+#include <iostream>
+
+typedef struct s_data
 {
-    if (ac != 2)
-    {
-        std::cout << "It only takes one argument to convert\n";
-        return (1);
-    }
-    ScalarConverter::convert(av[1]);
-}
+    std::string name;
+    int num;
+} Data;
+
+#endif

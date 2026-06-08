@@ -13,14 +13,15 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
-#include <iostream>
 #include <cctype>
 #include <cmath>
-#include <limits>
 #include <cstdlib>
+#include <iostream>
+#include <limits>
 
-class ScalarConverter{
-    private:
+class ScalarConverter
+{
+  private:
     ScalarConverter(void);
     ScalarConverter(ScalarConverter const &original);
     ScalarConverter &operator=(ScalarConverter const &rhs);
@@ -35,8 +36,8 @@ class ScalarConverter{
     static void printFloat(double value);
     static void printDouble(double value);
     static void printAll(double value);
-    
-    public:
+
+  public:
     static void convert(std::string toconvert);
 };
 

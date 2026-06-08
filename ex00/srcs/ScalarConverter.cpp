@@ -12,38 +12,43 @@
 
 #include "../includes/ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter(void){
+ScalarConverter::ScalarConverter(void)
+{
 }
 
-ScalarConverter::ScalarConverter(ScalarConverter const &original){
+ScalarConverter::ScalarConverter(ScalarConverter const &original)
+{
     (void)original;
 }
 
-ScalarConverter &ScalarConverter::operator=(ScalarConverter const &rhs){
+ScalarConverter &ScalarConverter::operator=(ScalarConverter const &rhs)
+{
     (void)rhs;
     return *this;
 }
 
-ScalarConverter::~ScalarConverter(){
+ScalarConverter::~ScalarConverter()
+{
 }
 
-int ScalarConverter::isChar(std::string toconvert){
+int ScalarConverter::isChar(std::string toconvert)
+{
     long unsigned int i = 0;
 
     if (toconvert == "nanf" || toconvert == "inff" || toconvert == "inf" || toconvert == "nan")
         return (0);
-    if ((toconvert[i] >= 'a' && toconvert[i] <= 'z') 
-            || (toconvert[i] >= 'A' && toconvert[i] <= 'Z'))
-    {    
+    if ((toconvert[i] >= 'a' && toconvert[i] <= 'z') || (toconvert[i] >= 'A' && toconvert[i] <= 'Z'))
+    {
         if (toconvert.length() == 1)
-                return (1);
-            else
-                return (-1);
+            return (1);
+        else
+            return (-1);
     }
     return (0);
 }
 
-int ScalarConverter::isInt(std::string toconvert){
+int ScalarConverter::isInt(std::string toconvert)
+{
     long unsigned int i = 0;
 
     if ((toconvert[i] == '+' || toconvert[i] == '-'))
@@ -58,7 +63,8 @@ int ScalarConverter::isInt(std::string toconvert){
     return (2);
 }
 
-int ScalarConverter::isFloat(std::string toconvert){
+int ScalarConverter::isFloat(std::string toconvert)
+{
     long unsigned int i = 0;
     int count = 0;
 
@@ -75,8 +81,8 @@ int ScalarConverter::isFloat(std::string toconvert){
             i++;
             count = 1;
         }
-        else if (toconvert[i] == 'f' && i == toconvert.length() - 1 
-                    && i > 0 && count == 1 && ((toconvert[i - 1] >= '0' && toconvert[i - 1] <= '9')))
+        else if (toconvert[i] == 'f' && i == toconvert.length() - 1 && i > 0 && count == 1 &&
+                 ((toconvert[i - 1] >= '0' && toconvert[i - 1] <= '9')))
             return (3);
         else
             break;
@@ -84,7 +90,8 @@ int ScalarConverter::isFloat(std::string toconvert){
     return (0);
 }
 
-int ScalarConverter::isDouble(std::string toconvert){
+int ScalarConverter::isDouble(std::string toconvert)
+{
     long unsigned int i = 0;
     int count = 0;
 
@@ -102,14 +109,15 @@ int ScalarConverter::isDouble(std::string toconvert){
             count = 1;
         }
         else
-            return (0); 
+            return (0);
     }
     return (4);
 }
 
-int ScalarConverter::Parsing(std::string toconvert){
+int ScalarConverter::Parsing(std::string toconvert)
+{
     int res;
-    
+
     if (toconvert.empty())
     {
         std::cout << "Empty string can't be converted" << "\n";
@@ -130,7 +138,8 @@ int ScalarConverter::Parsing(std::string toconvert){
     return (-1);
 }
 
-void ScalarConverter::printChar(double value){
+void ScalarConverter::printChar(double value)
+{
     std::cout << "char: ";
     if (std::isnan(value) || std::isinf(value) || value < 0 || value > 127)
         std::cout << "impossible.\n";
@@ -139,16 +148,19 @@ void ScalarConverter::printChar(double value){
     else
         std::cout << "" << static_cast<char>(value) << "\n";
 }
-    
-void ScalarConverter::printInt(double value){
+
+void ScalarConverter::printInt(double value)
+{
     std::cout << "int: ";
-    if (std::isnan(value) || std::isinf(value) || value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max())
+    if (std::isnan(value) || std::isinf(value) || value < std::numeric_limits<int>::min() ||
+        value > std::numeric_limits<int>::max())
         std::cout << "impossible.\n";
     else
         std::cout << static_cast<int>(value) << "\n";
 }
-    
-void ScalarConverter::printFloat(double value){
+
+void ScalarConverter::printFloat(double value)
+{
     std::cout << "float: ";
     float f = static_cast<float>(value);
     if (f == static_cast<int>(f))
@@ -156,23 +168,26 @@ void ScalarConverter::printFloat(double value){
     else
         std::cout << f << "f\n";
 }
-    
-void ScalarConverter::printDouble(double value){
+
+void ScalarConverter::printDouble(double value)
+{
     std::cout << "double: ";
     if (value == static_cast<int>(value))
         std::cout << value << ".0\n";
     else
         std::cout << value << "\n";
 }
-    
-void ScalarConverter::printAll(double value){
+
+void ScalarConverter::printAll(double value)
+{
     ScalarConverter::printChar(value);
     ScalarConverter::printInt(value);
     ScalarConverter::printFloat(value);
     ScalarConverter::printDouble(value);
 }
 
-void ScalarConverter::convert(std::string toconvert){
+void ScalarConverter::convert(std::string toconvert)
+{
     int res;
     double value;
 
@@ -180,7 +195,7 @@ void ScalarConverter::convert(std::string toconvert){
     if (res == -1)
     {
         std::cout << "To be converted, you have to write a char, int, float or double." << "\n";
-        return ;
+        return;
     }
     if (res != 1)
         value = std::strtod(toconvert.c_str(), NULL);
